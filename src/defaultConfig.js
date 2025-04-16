@@ -15,5 +15,9 @@ module.exports = {
   pathInputAttribute: 'ix-path',
   paramsInputAttribute: 'ix-params',
   hostInputAttribute: 'ix-host',
+  
+  ixInitializedAttribute: 'ix-initialized',
+  ixSizesAttribute: 'ix-sizes',
+  
   window: typeof window !== 'undefined' ? window : null,
 };

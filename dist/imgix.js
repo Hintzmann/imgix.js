@@ -396,7 +396,8 @@ var ImgixTag = (function () {
 
     this.window = this.settings.window ? this.settings.window : null;
 
-    if (this.el.hasAttribute('ix-initialized') && !this.settings.force) {
+    if (this.el.hasAttribute(this.settings.ixInitializedAttribute) && !this.settings.force) {
+      // console.log(this.el)
       return;
     }
 
@@ -451,7 +452,7 @@ var ImgixTag = (function () {
       this.el.setAttribute(this.settings.srcAttribute, this.src());
     }
 
-    this.el.setAttribute('ix-initialized', 'ix-initialized');
+    this.el.setAttribute(this.settings.ixInitializedAttribute, this.settings.ixInitializedAttribute);
   }
 
   ImgixTag.prototype._extractBaseParams = function () {
@@ -572,7 +573,7 @@ var ImgixTag = (function () {
 
   ImgixTag.prototype.sizes = function () {
     var existingSizes = this.el.getAttribute('sizes');
-    var ixSizes = this.el.getAttribute('ix-sizes');
+    var ixSizes = this.el.getAttribute(this.settings.ixSizesAttribute);
     const el = this.el;
     const _window = this.window;
 
@@ -792,6 +793,10 @@ module.exports = {
   pathInputAttribute: 'ix-path',
   paramsInputAttribute: 'ix-params',
   hostInputAttribute: 'ix-host',
+  
+  ixInitializedAttribute: 'ix-initialized',
+  ixSizesAttribute: 'ix-sizes',
+  
   window: typeof window !== 'undefined' ? window : null,
 };
 
@@ -801,7 +806,7 @@ var ImgixTag = require('./ImgixTag.js'),
   util = require('./util.js'),
   defaultConfig = require('./defaultConfig');
 
-var VERSION = '4.0.0';
+var VERSION = '4.0.1';
 
 global.imgix = {
   init: function (opts) {
